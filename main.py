@@ -180,8 +180,7 @@ class App:
     #! get primary key from which we selected
     def getPrimaryKey(self,string):
         dotPos = string.find('. ')
-        primaryKey = string[0:dotPos]
-        return primaryKey
+        return string[:dotPos]
 
     #! get text from which we selected
     def stripPrimaryKey(self,string):

@@ -127,21 +127,21 @@ class App:
     def view_todo_command(self):
         self.todo_list.delete(0, END)
         for row in database.view_todo():
-            row = str(row[0]) + '. ' + ''.join(row[1:])
+            row = f'{str(row[0])}. ' + ''.join(row[1:])
             self.todo_list.insert(END, row)
             
     #! display doing lists
     def view_doing_command(self):
         self.doing_list.delete(0, END)
         for row in database.view_doing():
-            row = str(row[0]) + '. ' + ''.join(row[1:])
+            row = f'{str(row[0])}. ' + ''.join(row[1:])
             self.doing_list.insert(END, row)
             
     #! display done lists
     def view_done_command(self):
         self.done_list.delete(0, END)
         for row in database.view_done():
-            row = str(row[0]) + '. ' + ''.join(row[1:])
+            row = f'{str(row[0])}. ' + ''.join(row[1:])
             self.done_list.insert(END, row)
 
     #! select the row from the todo list by click

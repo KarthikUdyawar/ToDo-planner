@@ -183,35 +183,26 @@ class App:
     
     #! update the text in list
     def update_selected(self):
-        try:
-            if len(self.enter_text.get()) > 1:
+        with contextlib.suppress(NameError):
                 database.update(self.getPrimaryKey(self.selected_string), self.enter_text.get())
-        except NameError:
-            pass
         self.refresh_text()
     
     #! delete the text in list
     def delete_command(self):
-        try:
+        with contextlib.suppress(NameError):
             database.delete(self.getPrimaryKey(self.selected_string))
-        except NameError:
-            pass
         self.refresh_text()
     
     #! Pusing the text into doing list    
     def push_doing_command(self):
-        try:
+        with contextlib.suppress(NameError):
             database.push_to_doing(self.getPrimaryKey(self.selected_string))
-        except NameError:
-            pass
         self.refresh_text()
         
     #! Pusing the text into done list    
     def push_done_command(self):
-        try:
+        with contextlib.suppress(NameError):
             database.push_to_done(self.getPrimaryKey(self.selected_string))
-        except NameError:
-            pass
         self.refresh_text()
     
 if __name__ == '__main__':

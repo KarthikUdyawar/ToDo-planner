@@ -1,5 +1,6 @@
 from tkinter import *
 from connect import Database
+import contextlib
 database = Database("database.db")
 
 class App:
@@ -146,37 +147,29 @@ class App:
 
     #! select the row from the todo list by click
     def get_selected_row_from_todo(self, event):
-        try:
-            index = self.todo_list.curselection()
-            if index:
+        with contextlib.suppress(IndexError):
+            if index := self.todo_list.curselection():
                 self.selected_string = self.todo_list.get(index)
                 self.entry_enter.delete(0, END)
                 self.entry_enter.insert(END, self.stripPrimaryKey(self.selected_string))
-        except IndexError:
-            pass
         
     #! select the row from the doing list by click
     def get_selected_row_from_doing(self, event):
-        try:
-            index = self.doing_list.curselection()
-            if index:
+        with contextlib.suppress(IndexError):
+            if index := self.todo_list.curselection():
                 self.selected_string = self.doing_list.get(index)
                 self.entry_enter.delete(0, END)
                 self.entry_enter.insert(END, self.stripPrimaryKey(self.selected_string))
-        except IndexError:
-            pass
+
         
     #! select the row from the done list by click
     def get_selected_row_from_done(self, event):
-        try:
-            index = self.done_list.curselection()
-            if index:
+        with contextlib.suppress(IndexError):
+            if index := self.todo_list.curselection():
                 self.selected_string = self.done_list.get(index)
                 self.entry_enter.delete(0, END)
                 self.entry_enter.insert(END, self.stripPrimaryKey(self.selected_string))
-        except IndexError:
-            pass
-    
+
     #! get primary key from which we selected
     def getPrimaryKey(self,string):
         dotPos = string.find('. ')

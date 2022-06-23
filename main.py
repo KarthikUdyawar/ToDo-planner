@@ -4,7 +4,7 @@ import contextlib
 database = Database("database.db")
 
 class App:
-    def __init__(self):
+    def __init__(self) -> None:
         #! Initialization 
         self.root = Tk()
         self.root.title('To Do Planner')
@@ -95,22 +95,22 @@ class App:
         self.root.mainloop()
         
     #! To toggle FullScreen
-    def toggleFullScreen(self, event):
+    def toggleFullScreen(self, event) -> None:
         self.fullScreenState = not self.fullScreenState
         self.root.attributes("-fullscreen", self.fullScreenState)
     
     #! To quit
-    def quit(self, event):
+    def quit(self, event) -> None:
         self.root.quit()
         
     #! Limiting text 
-    def character_limit(self, *args):
+    def character_limit(self, *args) -> None:
         value = self.enter_text.get()
         if len(value) > 70 and len(value) < 0:
             self.enter_text.set(value[:70])
         
     #! Add list    
-    def add_command(self):
+    def add_command(self) -> None:
         database.insert(self.enter_text.get())
         self.todo_list.delete(0, END)
         self.todo_list.insert(END, self.enter_text.get())
@@ -118,35 +118,35 @@ class App:
         self.refresh_text()
         
     #! Clear text
-    def refresh_text(self):
+    def refresh_text(self) -> None:
         self.entry_enter.delete(0, END)
         self.view_todo_command()
         self.view_doing_command()
         self.view_done_command()
         
     #! Display todo lists
-    def view_todo_command(self):
+    def view_todo_command(self) -> None:
         self.todo_list.delete(0, END)
         for row in database.view_todo():
             row = f'{str(row[0])}. ' + ''.join(row[1:])
             self.todo_list.insert(END, row)
             
     #! Display doing lists
-    def view_doing_command(self):
+    def view_doing_command(self) -> None:
         self.doing_list.delete(0, END)
         for row in database.view_doing():
             row = f'{str(row[0])}. ' + ''.join(row[1:])
             self.doing_list.insert(END, row)
             
     #! Display done lists
-    def view_done_command(self):
+    def view_done_command(self) -> None:
         self.done_list.delete(0, END)
         for row in database.view_done():
             row = f'{str(row[0])}. ' + ''.join(row[1:])
             self.done_list.insert(END, row)
 
     #! Select the row from the todo list by click
-    def get_selected_row_from_todo(self, event):
+    def get_selected_row_from_todo(self, event) -> None:
         with contextlib.suppress(IndexError):
             if index := self.todo_list.curselection():
                 self.selected_string = self.todo_list.get(index)
@@ -154,7 +154,7 @@ class App:
                 self.entry_enter.insert(END, self.stripPrimaryKey(self.selected_string))
         
     #! Select the row from the doing list by click
-    def get_selected_row_from_doing(self, event):
+    def get_selected_row_from_doing(self, event) -> None:
         with contextlib.suppress(IndexError):
             if index := self.todo_list.curselection():
                 self.selected_string = self.doing_list.get(index)
@@ -163,7 +163,7 @@ class App:
 
         
     #! Select the row from the done list by click
-    def get_selected_row_from_done(self, event):
+    def get_selected_row_from_done(self, event) -> None:
         with contextlib.suppress(IndexError):
             if index := self.todo_list.curselection():
                 self.selected_string = self.done_list.get(index)
@@ -171,36 +171,36 @@ class App:
                 self.entry_enter.insert(END, self.stripPrimaryKey(self.selected_string))
 
     #! Get primary key from which we selected
-    def getPrimaryKey(self,string):
+    def getPrimaryKey(self,string: str) -> str:
         dotPos = string.find('. ')
         return string[:dotPos]
 
     #! Get text from which we selected
-    def stripPrimaryKey(self,string):
+    def stripPrimaryKey(self,string: str) -> str:
         separation_token = '. '
         dotPos = string.find(separation_token)
         return string[dotPos + len(separation_token):]
     
     #! Update the text in list
-    def update_selected(self):
+    def update_selected(self) -> None:
         with contextlib.suppress(NameError):
                 database.update(self.getPrimaryKey(self.selected_string), self.enter_text.get())
         self.refresh_text()
     
     #! Delete the text in list
-    def delete_command(self):
+    def delete_command(self) -> None:
         with contextlib.suppress(NameError):
             database.delete(self.getPrimaryKey(self.selected_string))
         self.refresh_text()
     
     #! Pushing the text into doing list    
-    def push_doing_command(self):
+    def push_doing_command(self) -> None:
         with contextlib.suppress(NameError):
             database.push_to_doing(self.getPrimaryKey(self.selected_string))
         self.refresh_text()
         
     #! Pushing the text into done list    
-    def push_done_command(self):
+    def push_done_command(self) -> None:
         with contextlib.suppress(NameError):
             database.push_to_done(self.getPrimaryKey(self.selected_string))
         self.refresh_text()

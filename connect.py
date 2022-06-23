@@ -13,18 +13,15 @@ class Database:
 
     def view_todo(self):
         self.cur.execute("SELECT id, data FROM planer WHERE status = 0")
-        rows = self.cur.fetchall()
-        return rows
+        return self.cur.fetchall()
 
     def view_doing(self):
         self.cur.execute("SELECT id, data FROM planer WHERE status = 1")
-        rows = self.cur.fetchall()
-        return rows
+        return self.cur.fetchall()
 
     def view_done(self):
         self.cur.execute("SELECT id, data FROM planer WHERE status = 2")
-        rows = self.cur.fetchall()
-        return rows
+        return self.cur.fetchall()
 
     def delete(self, id):
         self.cur.execute("DELETE FROM planer WHERE id=?", (id,))

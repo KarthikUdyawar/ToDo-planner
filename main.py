@@ -99,7 +99,7 @@ class App:
         self.fullScreenState = not self.fullScreenState
         self.root.attributes("-fullscreen", self.fullScreenState)
     
-    #! to quit
+    #! To quit
     def quit(self, event):
         self.root.quit()
         
@@ -109,7 +109,7 @@ class App:
         if len(value) > 70 and len(value) < 0:
             self.enter_text.set(value[:70])
         
-    #! add list    
+    #! Add list    
     def add_command(self):
         database.insert(self.enter_text.get())
         self.todo_list.delete(0, END)
@@ -117,35 +117,35 @@ class App:
         self.todo_list.delete(0, END)
         self.refresh_text()
         
-    #! clear text
+    #! Clear text
     def refresh_text(self):
         self.entry_enter.delete(0, END)
         self.view_todo_command()
         self.view_doing_command()
         self.view_done_command()
         
-    #! display todo lists
+    #! Display todo lists
     def view_todo_command(self):
         self.todo_list.delete(0, END)
         for row in database.view_todo():
             row = f'{str(row[0])}. ' + ''.join(row[1:])
             self.todo_list.insert(END, row)
             
-    #! display doing lists
+    #! Display doing lists
     def view_doing_command(self):
         self.doing_list.delete(0, END)
         for row in database.view_doing():
             row = f'{str(row[0])}. ' + ''.join(row[1:])
             self.doing_list.insert(END, row)
             
-    #! display done lists
+    #! Display done lists
     def view_done_command(self):
         self.done_list.delete(0, END)
         for row in database.view_done():
             row = f'{str(row[0])}. ' + ''.join(row[1:])
             self.done_list.insert(END, row)
 
-    #! select the row from the todo list by click
+    #! Select the row from the todo list by click
     def get_selected_row_from_todo(self, event):
         with contextlib.suppress(IndexError):
             if index := self.todo_list.curselection():
@@ -153,7 +153,7 @@ class App:
                 self.entry_enter.delete(0, END)
                 self.entry_enter.insert(END, self.stripPrimaryKey(self.selected_string))
         
-    #! select the row from the doing list by click
+    #! Select the row from the doing list by click
     def get_selected_row_from_doing(self, event):
         with contextlib.suppress(IndexError):
             if index := self.todo_list.curselection():
@@ -162,7 +162,7 @@ class App:
                 self.entry_enter.insert(END, self.stripPrimaryKey(self.selected_string))
 
         
-    #! select the row from the done list by click
+    #! Select the row from the done list by click
     def get_selected_row_from_done(self, event):
         with contextlib.suppress(IndexError):
             if index := self.todo_list.curselection():
@@ -170,36 +170,36 @@ class App:
                 self.entry_enter.delete(0, END)
                 self.entry_enter.insert(END, self.stripPrimaryKey(self.selected_string))
 
-    #! get primary key from which we selected
+    #! Get primary key from which we selected
     def getPrimaryKey(self,string):
         dotPos = string.find('. ')
         return string[:dotPos]
 
-    #! get text from which we selected
+    #! Get text from which we selected
     def stripPrimaryKey(self,string):
         separation_token = '. '
         dotPos = string.find(separation_token)
         return string[dotPos + len(separation_token):]
     
-    #! update the text in list
+    #! Update the text in list
     def update_selected(self):
         with contextlib.suppress(NameError):
                 database.update(self.getPrimaryKey(self.selected_string), self.enter_text.get())
         self.refresh_text()
     
-    #! delete the text in list
+    #! Delete the text in list
     def delete_command(self):
         with contextlib.suppress(NameError):
             database.delete(self.getPrimaryKey(self.selected_string))
         self.refresh_text()
     
-    #! Pusing the text into doing list    
+    #! Pushing the text into doing list    
     def push_doing_command(self):
         with contextlib.suppress(NameError):
             database.push_to_doing(self.getPrimaryKey(self.selected_string))
         self.refresh_text()
         
-    #! Pusing the text into done list    
+    #! Pushing the text into done list    
     def push_done_command(self):
         with contextlib.suppress(NameError):
             database.push_to_done(self.getPrimaryKey(self.selected_string))

@@ -89,13 +89,13 @@ Check the latest versions or higher
 
 - python
 
-  ```sh
+  ```powershell
     python --version
     # Python 3.8.0
   ```
 
 - pip
-  ```sh
+  ```powershell
     pip --version
     # pip 22.1.2 from C:\python38\lib\site-packages\pip (python 3.8)
   ```
@@ -106,27 +106,28 @@ Steps to installing this project.
 
 1. Create virtual environment for your project
 
-  - Create
+- Create
 
-    ```sh
-      python -m venv env
-    ```
-  - Activate
+  ```bash
+    python -m venv env
+  ```
 
-    ```sh
-      env\Scripts\activate
-    ```
+- Activate
 
-  - Deactivate
+  ```bash
+    env\Scripts\activate
+  ```
 
-    ```sh
-      deactivate
-    ```
+- Deactivate
+
+  ```bash
+    deactivate
+  ```
 
 2. Clone the repo
 
-   ```sh
-   git clone https://github.com/KarthikUdyawar/ToDo-planner.git
+   ```bash
+    git clone https://github.com/KarthikUdyawar/ToDo-planner.git
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>

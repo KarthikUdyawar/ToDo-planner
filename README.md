@@ -148,7 +148,7 @@ To use/run this project
 
 ## Roadmap
 
-- [ ] Add Changelog
+- [x] Add Changelog
 - [ ] Multi-language Support
   - [ ] Hindi
   - [ ] Marathi

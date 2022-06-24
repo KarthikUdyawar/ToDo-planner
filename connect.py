@@ -1,10 +1,13 @@
 import sqlite3
 
+
 class Database:
     def __init__(self, db: str) -> None:
         self.conn = sqlite3.connect(db)
         self.cur = self.conn.cursor()
-        self.cur.execute("CREATE TABLE IF NOT EXISTS planer (id INTEGER PRIMARY KEY, data TEXT, status INTEGER)")
+        self.cur.execute(
+            "CREATE TABLE IF NOT EXISTS planer (id INTEGER PRIMARY KEY, data TEXT, status INTEGER)"
+        )
         self.conn.commit()
 
     def insert(self, data: str, status: int = 0) -> None:

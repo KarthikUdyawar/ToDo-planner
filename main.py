@@ -21,6 +21,10 @@ class App:
         #! Title
         title = Label(self.root,text='TO DO PLANNER',bd=10,relief=GROOVE,font=('times new roman',40,'bold'),bg='darkblue',fg='white')
         title.pack(side=TOP,fill=X)
+        
+        #! Icon
+        logo = PhotoImage(file = './icon/icon.png')
+        self.root.iconphoto(False, logo)
 
         #! Enter todo list
         self.lbl_enter = Label(self.root, text="Enter what do you plan to do:",font=("Times", "14", "bold"))
